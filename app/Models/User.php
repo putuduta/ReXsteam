@@ -19,7 +19,7 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
-        'email',
+        'username',
         'password',
     ];
 
@@ -33,12 +33,27 @@ class User extends Authenticatable
         'remember_token',
     ];
 
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array
-     */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
+    // /**
+    //  * The attributes that should be cast.
+    //  *
+    //  * @var array
+    //  */
+    // protected $casts = [
+    //     'email_verified_at' => 'datetime',
+    // ];
+
+    public function transactionHeaders()
+    {
+        return $this->hasMany('App\Models\TransactionHeader', 'user_id', 'id');
+    }
+
+    public function carts()
+    {
+        return $this->hasMany('App\Models\Cart', 'user_id', 'id');
+    }
+
+    public function friendship()
+    {
+        return $this->hasMany('App\Models\Friendship', 'friend_id', 'id');
+    }
 }
