@@ -19,12 +19,11 @@ class FriendsController extends Controller
             Friendship::with('user')->where('friend_id', auth()->user()->id)->where('is_mutual', false)->get();
         $pendingRequests = Friendship::with('friend')->where('user_id', auth()->user()->id)->where('is_mutual', false)->get();
 
-        $friendsFromUser =
-            Friendship::with('friend')->where('user_id', auth()->user()->id)->where('is_mutual', true)->get();
-        $friendsFromFriend =
-            Friendship::with('user')->where('friend_id', auth()->user()->id)->where('is_mutual', true)->get();
+        $friends = Friendship::with('friend', 'user')
+            ->where('user_id', auth()->user()->id)->orWhere('friend_id', auth()->user()->id);
+        $friends = $friends->where('is_mutual', true)->get();
 
-        return view('pages.friends', compact('incomingRequests', 'pendingRequests', 'friendsFromUser', 'friendsFromFriend'));
+        return view('pages.friends', compact('incomingRequests', 'pendingRequests', 'friends'));
     }
 
     public function store(Request $request)
@@ -37,13 +36,13 @@ class FriendsController extends Controller
             ->where('username', '!=', auth()->user()->username)
             ->first();
 
-        if (!$existUser) return back();
+        if (!$existUser) return back()->with('error', 'User does not exist');
 
         $existFriendship = Friendship::where([['friend_id', $existUser->id], ['user_id', auth()->user()->id]])
-            ->orWhere([['user_id', auth()->user()->id], ['friend_id', $existUser->id]])
+            ->orWhere([['user_id', $existUser->id], ['friend_id', auth()->user()->id]])
             ->first();
 
-        if ($existFriendship) return back();
+        if ($existFriendship) return back()->with('error', 'Friend request already exists or you already a friend with this user');
 
         Friendship::create([
             'friend_id' => $existUser->id,
@@ -51,7 +50,7 @@ class FriendsController extends Controller
             'is_mutual' => false,
         ]);
 
-        return redirect()->route('friends.index');
+        return redirect()->route('friends.index')->with('success', 'Friend request created');
     }
 
     public function accept(Request $request)
@@ -61,7 +60,7 @@ class FriendsController extends Controller
         if (!$existFriendship) return back();
         $existFriendship->update(['is_mutual' => true]);
 
-        return redirect()->route('friends.index');
+        return redirect()->route('friends.index')->with('success', 'Friend request accepted');
     }
 
     public function reject(Request $request)
@@ -71,6 +70,6 @@ class FriendsController extends Controller
         if (!$existFriendship) return back();
         $existFriendship->delete();
 
-        return redirect()->route('friends.index');
+        return redirect()->route('friends.index')->with('success', 'Friend request rejected');
     }
 }

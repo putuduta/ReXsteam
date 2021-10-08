@@ -48,11 +48,13 @@
 
                     <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                        <img class="img-profile-navbar" alt="">
+                        <img class="img-profile-navbar"
+                            src="/storage/assets/{{ auth()->user()->profile_picture ? auth()->user()->profile_picture : 'user-default.png'}}"
+                            alt="">
                     </a>
 
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                        <a href="#" class="dropdown-item">Profile</a>
+                        <a href="{{ route('profile.index') }}" class="dropdown-item">Profile</a>
 
                         @if(auth()->user()->role == 'member')
                         <a href="{{ route('friends.index') }}" class="dropdown-item">Friends</a>

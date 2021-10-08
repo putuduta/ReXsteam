@@ -3,11 +3,13 @@
         <ul class="list-unstyled">
             <li class="my-3"
                 style="{{ Route::currentRouteName() == 'profile.index' ? 'border-left: 5px solid #3490DC' : 'border-left: 5px solid white'}}">
-                <h5 class="font-weight-bold ml-3"><a href="#" class="text-reset">Profile</a></h5>
+                <h5 class="font-weight-bold ml-3"><a href="{{ route('profile.index') }}" class="text-reset">Profile</a>
+                </h5>
             </li>
             <li class="my-3"
                 style="{{ Route::currentRouteName() == 'friends.index' ?  'border-left: 5px solid #3490DC' : 'border-left: 5px solid white'}}">
-                <h5 class="font-weight-bold ml-3"><a href="#" class="text-reset">Friends</a></h5>
+                <h5 class="font-weight-bold ml-3"><a href="{{ route('friends.index') }}" class="text-reset">Friends</a>
+                </h5>
             </li>
             <li class="my-3"
                 style="{{ Route::currentRouteName() == 'transaction.index' ?  'border-left: 5px solid #3490DC' : 'border-left: 5px solid white'}}">

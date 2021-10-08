@@ -14,7 +14,7 @@
                         <label for="username">{{ __('Username') }}</label>
                         <input id="username" type="username"
                             class="form-control @error('username') is-invalid @enderror" name="username"
-                            value="{{ old('username') }}" required autocomplete="username" autofocus>
+                            value="{{ old('username') }}">
                         @error('username')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -26,7 +26,7 @@
                         <label for="full_name">{{ __('Full Name') }}</label>
                         <input id="full_name" type="username"
                             class="form-control @error('full_name') is-invalid @enderror" name="full_name"
-                            value="{{ old('full_name') }}" required autocomplete="full_name" autofocus>
+                            value="{{ old('full_name') }}">
                         @error('full_name')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -37,7 +37,7 @@
                     <div class="form-group mb-4">
                         <label for="password">{{ __('Password') }}</label>
                         <input id="password" type="password" value="{{ old('password') }}"
-                            class="form-control @error('password') is-invalid @enderror" name="password" required
+                            class="form-control @error('password') is-invalid @enderror" name="password"
                             autocomplete="current-password">
 
                         @error('password')
@@ -50,7 +50,7 @@
                     <div class="form-group mb-4">
                         <label for="role">{{ __('Role') }}</label>
 
-                        <select class="form-control" name="role" id="role" required @error('role') is-invalid @enderror>
+                        <select class="form-control" name="role" id="role" @error('role') is-invalid @enderror>
                             <option value="member" {{ old('role') == 'member' ? 'selected' : '' }}>Member</option>
                             <option value="admin" {{ old('role') == 'admin' ? 'selected' : '' }}>Admin</option>
                         </select>

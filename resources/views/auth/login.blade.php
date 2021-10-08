@@ -14,7 +14,7 @@
                         <label for="username">{{ __('Username') }}</label>
                         <input id="username" type="username"
                             class="form-control @error('username') is-invalid @enderror" name="username"
-                            value="{{ old('username') }}" required autocomplete="username" autofocus>
+                            value="{{ old('username') }}">
                         @error('username')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -25,8 +25,7 @@
                     <div class="form-group mb-4">
                         <label for="password">{{ __('Password') }}</label>
                         <input id="password" type="password"
-                            class="form-control @error('password') is-invalid @enderror" name="password" required
-                            autocomplete="current-password">
+                            class="form-control @error('password') is-invalid @enderror" name="password">
 
                         @error('password')
                         <span class="invalid-feedback" role="alert">

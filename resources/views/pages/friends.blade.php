@@ -59,6 +59,7 @@
                                                     <form action="{{ route('friends.reject', ['id' => $request->id]) }}"
                                                         method="POST">
                                                         @csrf
+                                                        @method('delete')
                                                         <button type="submit"
                                                             class="btn btn-danger btn-block">Reject</button>
                                                     </form>
@@ -99,6 +100,7 @@
                                                     <form action="{{ route('friends.reject', ['id' => $request->id]) }}"
                                                         method="POST">
                                                         @csrf
+                                                        @method('delete')
                                                         <button type="submit"
                                                             class="btn btn-danger btn-block">Cancel</button>
                                                     </form>
@@ -115,54 +117,35 @@
                         <div class="my-5">
                             <h4 class="font-weight-bold mb-3">Friends</h4>
                             <div class="row">
-                                @if(count($friendsFromUser) > 0 || count($friendsFromFriend) > 0)
-                                @foreach ($friendsFromUser as $friend)
+                                @forelse ($friends as $friend)
                                 <div class="col-lg-4">
                                     <div class="card shadow-sm border-0 bg-light">
                                         <div class="card-body my-3">
                                             <div class="row">
                                                 <div class="col-8">
                                                     <div class="d-inline-flex align-items-center">
-                                                        <h5 class="m-0">{{ $friend->friend->full_name }}</h5>
-                                                        <button class="btn btn-sm btn-success ml-3
-                                                            rounded-circle">{{ $friend->friend->level }}</button>
+                                                        <h5 class="m-0">
+                                                            {{ $friend->user_id == auth()->user()->id ? $friend->friend->full_name : $friend->user->full_name }}
+                                                        </h5>
+                                                        <button
+                                                            class="btn btn-sm btn-success ml-3
+                                                                rounded-pill">{{ $friend->user_id == auth()->user()->id ? $friend->friend->level : $friend->user->level }}</button>
                                                     </div>
-                                                    <p>{{ $friend->friend->role }}</p>
+                                                    <p>{{ ucwords($friend->user->role) }}</p>
                                                 </div>
                                                 <div class="col-4">
-                                                    <img src="/storage/assets/{{ $friend->friend->profile_picture ? $friend->friend->profile_picture : 'user-default.png' }}"
+                                                    <img src="/storage/assets/{{ $friend->user_id == auth()->user()->id ? 
+                                                    ($friend->friend->profile_picture ? $friend->friend->profile_picture : 'user-default.png') 
+                                                    : ($friend->user->profile_picture ? $friend->user->profile_picture : 'user-default.png') }}"
                                                         alt="" class="w-100 rounded-circle">
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                @endforeach
-                                @foreach ($friendsFromFriend as $friend)
-                                <div class="col-lg-4">
-                                    <div class="card shadow-sm border-0 bg-light">
-                                        <div class="card-body my-3">
-                                            <div class="row">
-                                                <div class="col-8">
-                                                    <div class="d-inline-flex align-items-center">
-                                                        <h5 class="m-0">{{ $friend->user->full_name }}</h5>
-                                                        <button class="btn btn-sm btn-success ml-3
-                                                            rounded-circle">{{ $friend->user->level }}</button>
-                                                    </div>
-                                                    <p>{{ $friend->user->role }}</p>
-                                                </div>
-                                                <div class="col-4">
-                                                    <img src="/storage/assets/{{ $friend->user->profile_picture ? $friend->user->profile_picture : 'user-default.png' }}"
-                                                        alt="" class="w-100 rounded-circle">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                @endforeach
-                                @else
+                                @empty
                                 <div class="col-12">There is no friend.</div>
-                                @endif
+                                @endforelse
                             </div>
                         </div>
                     </div>

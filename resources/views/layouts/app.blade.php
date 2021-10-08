@@ -23,6 +23,7 @@
 </head>
 
 <body>
+    @include('include.alert')
     <div id="app">
         <main>
             @yield('content')
