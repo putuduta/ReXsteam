@@ -41,4 +41,19 @@ class User extends Authenticatable
     // protected $casts = [
     //     'email_verified_at' => 'datetime',
     // ];
+
+    public function transactionHeaders()
+    {
+        return $this->hasMany('App\Models\TransactionHeader', 'user_id', 'id');
+    }
+
+    public function carts()
+    {
+        return $this->hasMany('App\Models\Cart', 'user_id', 'id');
+    }
+
+    public function friendship()
+    {
+        return $this->hasMany('App\Models\Friendship', 'friend_id', 'id');
+    }
 }
