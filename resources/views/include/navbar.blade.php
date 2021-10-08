@@ -1,5 +1,5 @@
-<nav class="navbar navbar-expand-md navbar-dark bg-dark shadow-sm">
-    <div class="container">
+<nav class="navbar navbar-expand-md navbar-dark shadow-sm">
+    <div class="container-fluid">
         <a class="navbar-brand" href="{{ url('/') }}">
             {{ config('app.name', 'ReXsteam') }}
         </a>
@@ -11,22 +11,32 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <!-- Left Side Of Navbar -->
             <ul class="navbar-nav mr-auto">
-
+                <a class="nav-link text-white" href="{{ route('home') }}">{{ __('Home') }}</a>
             </ul>
 
             <!-- Right Side Of Navbar -->
             <ul class="navbar-nav ml-auto">
+                <div class="mr-lg-5">
+                    <form action="#" method="GET" class="mb-0">
+                        @csrf
+                        <div class="d-flex">
+                            <input type="text" name="search_value" class="form-control bg-dark text-white" required
+                                placeholder="Search">
+                            <button type="submit" class="btn btn-primary ml-2">Search</button>
+                        </div>
+                    </form>
+                </div>
                 <!-- Authentication Links -->
                 @guest
                 @if (Route::has('login'))
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                    <a class="nav-link text-white" href="{{ route('login') }}">{{ __('Login') }}</a>
                 </li>
                 @endif
 
                 @if (Route::has('register'))
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                    <a class="nav-link text-white" href="{{ route('register') }}">{{ __('Register') }}</a>
                 </li>
                 @endif
                 @else

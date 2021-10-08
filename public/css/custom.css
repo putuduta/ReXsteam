@@ -1,7 +1,66 @@
+/* GENERAL */
 * {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
 }
 
+footer,
+nav {
+    background-color: rgb(46, 46, 46);
+}
+
+
+.main-wrapper {
+    padding: 5rem 0;
+    min-height: 85vh;
+    background-color: rgb(219, 219, 219);
+}
+
+.icon-footer {
+    filter: brightness(0) invert(1);
+    height: 50px;
+}
+
+.title-section {
+    font-size: 48px;
+    font-weight: bold;
+    color: rgb(58, 58, 58);
+}
+
+.card-game {
+    position: relative;
+    border-radius: 20px;
+    height: 250px;
+    border: none;
+    cursor: pointer;
+    transition: 0.2s ease all;
+}
+
+.card-game:hover {
+    transform: scale(1.02);
+}
+
+.card-game-img {
+    position: absolute;
+    height: 250px;
+    width: 100%;
+    object-fit: cover;
+    z-index: 9;
+    border-radius: 20px;
+    filter: opacity(0.6);
+}
+
+.inner-card-game {
+    z-index: 10;
+}
+
+.card-inner-card-game {
+    border: none;
+    padding: 10px 15px;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.7);
+}
+
+/* LOGIN & REGISTER */
 .background-auth {
     background-color: black;
     min-height: 100vh;
