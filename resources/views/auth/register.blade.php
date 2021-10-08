@@ -36,7 +36,7 @@
 
                     <div class="form-group mb-4">
                         <label for="password">{{ __('Password') }}</label>
-                        <input id="password" type="password"
+                        <input id="password" type="password" value="{{ old('password') }}"
                             class="form-control @error('password') is-invalid @enderror" name="password" required
                             autocomplete="current-password">
 
@@ -51,8 +51,8 @@
                         <label for="role">{{ __('Role') }}</label>
 
                         <select class="form-control" name="role" id="role" required @error('role') is-invalid @enderror>
-                            <option value="member">Member</option>
-                            <option value="admin">Admin</option>
+                            <option value="member" {{ old('role') == 'member' ? 'selected' : '' }}>Member</option>
+                            <option value="admin" {{ old('role') == 'admin' ? 'selected' : '' }}>Admin</option>
                         </select>
                         @error('role')
                         <span class="invalid-feedback" role="alert">

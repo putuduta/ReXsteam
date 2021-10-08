@@ -16,7 +16,7 @@
 
             <!-- Right Side Of Navbar -->
             <ul class="navbar-nav ml-auto">
-                <div class="mr-lg-5">
+                <div class="mr-lg-4">
                     <form action="#" method="GET" class="mb-0">
                         @csrf
                         <div class="d-flex">
@@ -40,16 +40,27 @@
                 </li>
                 @endif
                 @else
+                <li class="nav-item mr-lg-4">
+                    <a class="nav-link" href="#"><img src="/storage/assets/cart-icon.png"
+                            style="height:30px;filter:brightness(0) invert(1);" alt=""></a>
+                </li>
                 <li class="nav-item dropdown">
+
                     <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                        {{ Auth::user()->name }}
+                        <img class="img-profile-navbar" alt="">
                     </a>
 
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                        <a href="#" class="dropdown-item">Profile</a>
+
+                        @if(auth()->user()->role == 'member')
+                        <a href="{{ route('friends.index') }}" class="dropdown-item">Friends</a>
+                        <a href="#" class="dropdown-item">Transaction History</a>
+                        @endif
                         <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                            {{ __('Logout') }}
+                            {{ __('Sign Out') }}
                         </a>
 
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">

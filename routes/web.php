@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\FriendsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,4 +17,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 Auth::routes();
-Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('home');
+
+// Friendship
+Route::get('/friends', [FriendsController::class, 'index'])->name('friends.index');
+Route::post('/friends/store', [FriendsController::class, 'store'])->name('friends.store');
+Route::post('/friends/accept', [FriendsController::class, 'accept'])->name('friends.accept');
+Route::post('/friends/reject', [FriendsController::class, 'reject'])->name('friends.reject');
