@@ -1,7 +1,81 @@
+/* GENERAL */
 * {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif !important;
 }
 
+footer,
+nav {
+    background-color: rgb(46, 46, 46);
+}
+
+.alert-top {
+    position: fixed;
+    top: 1%;
+    left: 10%;
+    right: 10%;
+    width: 80%;
+    z-index: 999;
+}
+
+.img-profile-navbar {
+    width: 30px;
+    height: 30px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.main-wrapper {
+    padding: 5rem 0;
+    min-height: 100vh;
+    background-color: rgb(219, 219, 219);
+}
+
+.icon-footer {
+    filter: brightness(0) invert(1);
+    height: 50px;
+}
+
+.title-section {
+    font-size: 48px;
+    font-weight: bold;
+    color: rgb(58, 58, 58);
+}
+
+.card-game {
+    position: relative;
+    border-radius: 5px;
+    height: 250px;
+    border: none;
+    cursor: pointer;
+    transition: 0.2s ease all;
+}
+
+.card-game:hover {
+    transform: scale(1.02);
+}
+
+.card-game-img {
+    position: absolute;
+    height: 250px;
+    width: 100%;
+    object-fit: cover;
+    z-index: 9;
+    border-radius: 5px;
+    filter: opacity(0.6);
+}
+
+.inner-card-game {
+    z-index: 10;
+}
+
+.card-inner-card-game {
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.7);
+}
+
+/* LOGIN & REGISTER */
 .background-auth {
     background-color: black;
     min-height: 100vh;
@@ -16,4 +90,51 @@
 .title-auth {
     font-size: 72px;
     font-weight: bold;
+}
+
+.text-input {
+    font-weight: bold;
+    color: rgb(58, 58, 58);
+}
+
+
+.game_cover input[type=text] {
+    background-color: transparent;
+    width: 100%;
+    font-size: 80%;
+    text-align: center;
+    /*text-transform: uppercase;*/
+    
+    padding: 1rem 2rem;
+    border: 0;
+}
+
+.game_cover label.file {
+    position: relative;
+    display: block;
+    width: 100%;
+    font-size: 80%;
+    text-align: center;
+    border: 2px dashed #ccc;
+    padding: 3rem;
+}
+
+.game_cover label.file:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+.game_cover label.file:active,
+.game_cover label.file.focus {
+    border-color: #09f;
+}
+
+.game_cover input[type=file] {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    outline: 0;
+    border: 1px solid red;
 }

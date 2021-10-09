@@ -9,7 +9,7 @@ class Game extends Model
 {
     use HasFactory;
 
-    protected $table = 'game';
+    protected $table = 'games';
     protected $primaryKey = 'id';
     protected $timestamp = true;
     protected $guarded = [];

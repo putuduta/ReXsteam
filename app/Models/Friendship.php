@@ -9,7 +9,7 @@ class Friendship extends Model
 {
     use HasFactory;
 
-    protected $table = 'friendship';
+    protected $table = 'friendships';
     protected $primaryKey = 'id';
     protected $timestamp = true;
     protected $guarded = [];

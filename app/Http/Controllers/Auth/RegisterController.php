@@ -29,7 +29,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+    protected $redirectTo = '/';
 
     /**
      * Create a new controller instance.
@@ -50,9 +50,9 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'username' => ['required', 'string', 'max:255', 'min:6', 'unique:users'],
-            'full_name' => ['required', 'string', 'max:255'],
-            'password' => ['required', 'string', 'min:6', 'alpha_num'],
+            'username' => ['required', 'min:6', 'unique:users'],
+            'full_name' => ['required'],
+            'password' => ['required', 'min:6', 'alpha_num'],
             'role' => ['required', 'in:member,admin']
         ]);
     }
