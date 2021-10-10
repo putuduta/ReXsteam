@@ -5,6 +5,16 @@
 <!-- Create Games -->
 <section class="main-wrapper" style="padding-top: 2rem;!important">
     <div class="container-fluid">
+
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/"><i class="fa fa-home" aria-hidden="true"></i></a></li>
+                <li class="breadcrumb-item"><a href="#">Action</a></li>
+                <li class="breadcrumb-item active" aria-current="page">{{ $game->name }}</li>
+            </ol>
+        </nav>
+       
+
         <h3 class="title-section pb-2" style="font-size: 32px;!important">Update Games</h3>
         <form method="POST" action="{{ route('games.update', $game) }}" enctype="multipart/form-data">
             @csrf
@@ -103,10 +113,13 @@
                     </div>
                 </div>
             </div>
-            <hr>
+            
+            <div class="btn-game">
+                <hr>
+            </div>
 
             @method('PUT')
-            <div class="d-flex justify-content-end">
+            <div class="d-flex justify-content-end btn-game">
                 <a class="btn btn-mb btn-light mr-3" href="/">Cancel</a>
                 <button type="submit" class="btn btn-mb btn-dark">
                     {{_('Submit')}}
@@ -114,7 +127,7 @@
             </div>
         </form>
 
-        
+
     </div>
 </section>
 

@@ -29,7 +29,7 @@ class GameController extends Controller
         if(request()->hasFile('cover')){
             $extension = request()->file('cover')->getClientOriginalExtension();
             $coverFileName = $request->name.'_cover'.'.'.$extension;
-            request()->file('cover')->storeAs('public/assets', $coverFileName);
+            request()->file('cover')->storeAs('public/assets/covers', $coverFileName);
         }else{
             $coverFileName = NULL;
         }
@@ -37,7 +37,7 @@ class GameController extends Controller
         if (request()->hasFile('trailer')) {
             $extension = request()->file('trailer')->getClientOriginalExtension();
             $trailerName =  $request->name.'_trailer'.'.'.$extension;
-            request()->file('trailer')->storeAs('public/assets', $trailerName);
+            request()->file('trailer')->storeAs('public/assets/trailers', $trailerName);
 
         } else {
             $trailerName = NULL;

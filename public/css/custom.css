@@ -1,6 +1,6 @@
 /* GENERAL */
 * {
-    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif !important;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 footer,
@@ -137,4 +137,23 @@ nav {
     opacity: 0;
     outline: 0;
     border: 1px solid red;
+}
+
+.btn-game {
+    padding-right: 30px;
+}
+
+.breadcrumb {
+    font-size: 16px;
+    padding-left: 0px;
+    border-radius: 0;
+    background-color: rgb(219, 219, 219);
+}
+
+.breadcrumb a {
+    color: gray;
+}
+
+.breadcrumb-item+.breadcrumb-item::before { 
+    content: ">";
 }

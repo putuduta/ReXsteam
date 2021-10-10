@@ -154,9 +154,12 @@
                     </div>
                 </div>
             </div>
-            <hr>
             
-            <div class="d-flex justify-content-end">
+            <div class="btn-game">
+                <hr>
+            </div>
+
+            <div class="d-flex justify-content-end btn-game">
                 <a class="btn btn-mb btn-light mr-3" href="/">Cancel</a>
                 <button type="submit" class="btn btn-mb btn-dark">
                     {{_('Submit')}}

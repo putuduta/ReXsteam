@@ -9,7 +9,7 @@
                 @foreach ($games as $game)
                     <div class="col-md-3 my-3">
                         <div class="card card-game shadow-sm">
-                            <img src="/storage/assets/{{ $game->cover }}" class="card-game-img" alt="">
+                            <img src="/storage/assets/covers/{{ $game->cover }}" class="card-game-img" alt="">
                             <div class="card-body d-flex align-items-end inner-card-game">
                                 <div class="card card-inner-card-game">
                                     <h3 class="font-weight-bold">{{ $game->name }}</h3>
