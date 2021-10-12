@@ -11,7 +11,14 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <!-- Left Side Of Navbar -->
             <ul class="navbar-nav mr-auto">
-                <a class="nav-link text-white" href="{{ route('home') }}">{{ __('Home') }}</a>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="{{ route('home') }}">{{ __('Home') }}</a>
+                </li>
+                @if(auth()->user()->role === 'admin')
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="{{ route('games.index') }}">{{ __('Manage Game') }}</a>
+                </li>
+                @endif
             </ul>
 
             <!-- Right Side Of Navbar -->

@@ -28,7 +28,7 @@ class ProfileController extends Controller
         if (request()->hasFile('profile_picture')) {
             $extension = request()->file('profile_picture')->getClientOriginalExtension();
             $fileName = auth()->user()->id . '_' . time() . '.' . $extension;
-            request()->file('profile_picture')->storeAs('public/assets', $fileName);
+            request()->file('profile_picture')->storeAs('public/assets/profile', $fileName);
         } else {
             $fileName = $user->profile_picture;
         }

@@ -13,37 +13,37 @@ class GameController extends Controller
         $this->middleware('auth');
     }
 
-    public function manage() {
-        return view('pages.manage_game');
+    public function index()
+    {
+        return view('pages.games.index');
     }
 
     public function create()
     {
-        return view('pages.create_game');
+        return view('pages.games.create');
     }
 
     public function store(Request $request)
     {
         $this->validateRequest($request, TRUE);
 
-        if(request()->hasFile('cover')){
+        if (request()->hasFile('cover')) {
             $extension = request()->file('cover')->getClientOriginalExtension();
-            $coverFileName = $request->name.'_cover'.'.'.$extension;
+            $coverFileName = $request->name . '_cover_' . time() . '.' . $extension;
             request()->file('cover')->storeAs('public/assets/covers', $coverFileName);
-        }else{
+        } else {
             $coverFileName = NULL;
         }
 
         if (request()->hasFile('trailer')) {
             $extension = request()->file('trailer')->getClientOriginalExtension();
-            $trailerName =  $request->name.'_trailer'.'.'.$extension;
+            $trailerName =  $request->name . '_trailer_' . time() . '.' . $extension;
             request()->file('trailer')->storeAs('public/assets/trailers', $trailerName);
-
         } else {
             $trailerName = NULL;
         }
-        
-        Game::create ([
+
+        Game::create([
             'name' => request('name'),
             'description' => request('description'),
             'long_description' => request('long_description'),
@@ -53,16 +53,16 @@ class GameController extends Controller
             'price' => request('price'),
             'cover' => $coverFileName,
             'trailer' => $trailerName,
-            'is_adult' => request('is_adult') == '1' ? TRUE : FALSE
+            'is_adult' => request('is_adult') ? true : false,
         ]);
 
-        return redirect()->route('home')->with('success','Game Successfully Created!');
+        return redirect()->route('games.index')->with('success', 'Game Successfully Created!');
     }
 
     public function edit(Game $game)
     {
-        return view('pages.edit_game', [
-            'game' => Game::where ('id', $game->id) -> first()
+        return view('pages.games.edit', [
+            'game' => Game::where('id', $game->id)->first()
         ]);
     }
 
@@ -70,23 +70,23 @@ class GameController extends Controller
     {
         $this->validateRequest($request, FALSE);
 
-        if ($request -> hasFile('cover_image_new')) {
+        if ($request->hasFile('cover_image_new')) {
             $extension = $request->file('cover_image_new')->getClientOriginalExtension();
-            $coverFileName = $game->name.'_cover_updated'.time().'.'.$extension;
+            $coverFileName = $game->name . '_cover_' . time() . '.' . $extension;
             request()->file('cover')->storeAs('public/assets/covers', $coverFileName);
-        }else {
+        } else {
             $coverFileName = $game->cover;
         }
 
-        if ($request -> hasFile('new_trailer')) {
+        if ($request->hasFile('new_trailer')) {
             $extension = $request->file('new_trailer')->getClientOriginalExtension();
-            $trailerFileName = $game->name.'_cover_updated'.time().'.'.$extension;
+            $trailerFileName = $game->name . '_trailer_' . time() . '.' . $extension;
             request()->file('trailer')->storeAs('public/assets/trailers', $trailerFileName);
-        }else {
+        } else {
             $trailerFileName = $game->trailer;
         }
 
-        $game -> update([
+        $game->update([
             'description' => request('description'),
             'long_description' => request('long_description'),
             'category' => request('category'),
@@ -95,7 +95,7 @@ class GameController extends Controller
             'trailer' => $trailerFileName,
         ]);
 
-        return redirect()->route('home')->with('success','Edit Success!');
+        return redirect()->route('home')->with('success', 'Edit Success!');
     }
 
     public function destroy(Game $game)
@@ -105,31 +105,30 @@ class GameController extends Controller
     }
 
     // Function for validating request
-    public function validateRequest (Request $request, bool $isCreate) {
-        $request -> validate([
+    public function validateRequest(Request $request, bool $isCreate)
+    {
+        $request->validate([
             'name' => 'string|unique:games',
             'description' => 'required|string|max:500',
             'long_description' => 'required|string|max:2000',
             'category' => 'required|string|max:2000',
             'cover' => 'image|max:100|mimes:jpg',
-            'trailer' => 'max:1000000|mimes:webm',
+            'trailer' => 'max:100000|mimes:webm',
             'price' => 'required|integer|max:1000000|'
         ]);
 
-        if ($isCreate) 
-        {
-            $request -> validate([
+        if ($isCreate) {
+            $request->validate([
                 'name' => 'required',
                 'developer' => 'required',
                 'publisher' => 'required',
-                'cover'=> 'required',
-                'trailer'=> 'required'
+                'cover' => 'required',
+                'trailer' => 'required'
             ]);
-        }else 
-        {
-            $request -> validate([
-                'cover'=> 'nullable',
-                'trailer'=> 'nullable'
+        } else {
+            $request->validate([
+                'cover' => 'nullable',
+                'trailer' => 'nullable'
             ]);
         }
     }
