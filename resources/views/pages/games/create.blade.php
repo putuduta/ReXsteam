@@ -120,7 +120,6 @@
                             <p class="text-muted pt-2">JPG up to 100kb.
                             </p>
                             <input type="file" class="ml-3 mr-5 pr-5 form-control" id="cover" name="cover" required>
-                            <!-- use multiple, even if it’s not allowed, to be able to show an info text -->
                             <p class="info"></p>
                         </label>
                     </div>
@@ -135,7 +134,6 @@
                             <p class="text-muted pt-2">WEBM up to 100mb.
                             </p>
                             <input type="file" class="ml-3 mr-5 pr-5 form-control" id="trailer" name="trailer" required>
-                            <!-- use multiple, even if it’s not allowed, to be able to show an info text -->
                             <p class="info"></p>
                         </label>
                     </div>
@@ -154,7 +152,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="btn-game">
                 <hr>
             </div>
@@ -167,39 +165,40 @@
             </div>
         </form>
 
-        
+
     </div>
 </section>
 
 <script>
-    $(document).ready(function() {
-		$('input[type=file]').change(function() {
-				//console.log(this.files);
-				var f = this.files;
-				var el = $(this).parent();
-				if (f.length > 1) {
-						console.log(this.files, 1);
-						el.text('Sorry, multiple files are not allowed');
-						return;
-				}
-				// el.removeClass('focus');
-				el.append(f[0].name + '<br>' +
-						'<span class="sml">' +
-						'type: ' + f[0].type + ', ' +
-						Math.round(f[0].size / 1024) + ' KB</span>');
-                        console.log($('#text').val());
-		});
+    $(document).ready(function () {
+        $('input[type=file]').change(function () {
+            //console.log(this.files);
+            var f = this.files;
+            var el = $(this).parent();
+            if (f.length > 1) {
+                console.log(this.files, 1);
+                el.text('Sorry, multiple files are not allowed');
+                return;
+            }
+            // el.removeClass('focus');
+            el.append(f[0].name + '<br>' +
+                '<span class="sml">' +
+                'type: ' + f[0].type + ', ' +
+                Math.round(f[0].size / 1024) + ' KB</span>');
+            console.log($('#text').val());
+        });
 
-		$('input[type=file]').on('focus', function() {
-				$(this).parent().addClass('focus');
-		});
+        $('input[type=file]').on('focus', function () {
+            $(this).parent().addClass('focus');
+        });
 
-		$('input[type=file]').on('blur', function() {
-				$(this).parent().removeClass('focus');
-		});
+        $('input[type=file]').on('blur', function () {
+            $(this).parent().removeClass('focus');
+        });
 
-        
-});
+
+    });
+
 </script>
 
 @include('include.footer')

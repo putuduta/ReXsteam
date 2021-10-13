@@ -9,11 +9,11 @@
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="/"><i class="fa fa-home" aria-hidden="true"></i></a></li>
-                <li class="breadcrumb-item"><a href="#">Action</a></li>
+                <li class="breadcrumb-item"><a href="#">{{ $game->category }}</a></li>
                 <li class="breadcrumb-item active" aria-current="page">{{ $game->name }}</li>
             </ol>
         </nav>
-       
+
 
         <h3 class="title-section pb-2" style="font-size: 32px;!important">Update Games</h3>
         <form method="POST" action="{{ route('games.update', $game) }}" enctype="multipart/form-data">
@@ -113,7 +113,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="btn-game">
                 <hr>
             </div>
@@ -132,34 +132,35 @@
 </section>
 
 <script>
-    $(document).ready(function() {
-		$('input[type=file]').change(function() {
-				//console.log(this.files);
-				var f = this.files;
-				var el = $(this).parent();
-				if (f.length > 1) {
-						console.log(this.files, 1);
-						el.text('Sorry, multiple files are not allowed');
-						return;
-				}
-				// el.removeClass('focus');
-				el.append(f[0].name + '<br>' +
-						'<span class="sml">' +
-						'type: ' + f[0].type + ', ' +
-						Math.round(f[0].size / 1024) + ' KB</span>');
-                        console.log($('#text').val());
-		});
+    $(document).ready(function () {
+        $('input[type=file]').change(function () {
+            //console.log(this.files);
+            var f = this.files;
+            var el = $(this).parent();
+            if (f.length > 1) {
+                console.log(this.files, 1);
+                el.text('Sorry, multiple files are not allowed');
+                return;
+            }
+            // el.removeClass('focus');
+            el.append(f[0].name + '<br>' +
+                '<span class="sml">' +
+                'type: ' + f[0].type + ', ' +
+                Math.round(f[0].size / 1024) + ' KB</span>');
+            console.log($('#text').val());
+        });
 
-		$('input[type=file]').on('focus', function() {
-				$(this).parent().addClass('focus');
-		});
+        $('input[type=file]').on('focus', function () {
+            $(this).parent().addClass('focus');
+        });
 
-		$('input[type=file]').on('blur', function() {
-				$(this).parent().removeClass('focus');
-		});
+        $('input[type=file]').on('blur', function () {
+            $(this).parent().removeClass('focus');
+        });
 
-        
-});
+
+    });
+
 </script>
 
 @include('include.footer')

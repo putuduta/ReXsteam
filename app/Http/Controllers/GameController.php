@@ -59,6 +59,44 @@ class GameController extends Controller
         return redirect()->route('games.index')->with('success', 'Game Successfully Created!');
     }
 
+    public function show(Request $request, Game $game)
+    {
+        if ($game->is_adult) {
+
+            if (!$request->submit) {
+                return view('pages.games.filter', compact('game'));
+            } else {
+
+                $pass = true;
+
+                if ($request->submit == 'cancel') {
+                    $pass = false;
+                } else {
+                    $this->validate($request, [
+                        'day' => 'required|integer|min:1|max:31',
+                        'month' => 'required|integer|min:1|max:12',
+                        'year' => 'required|integer|min:1900|max:2021',
+                    ]);
+
+                    if ($request->year + 17 > date('Y')) {
+                        $pass = false;
+                    } else if ($request->year + 17 == date('Y') && $request->month < date('m')) {
+                        $pass = false;
+                    } else if ($request->year + 17 == date('Y') && $request->month == date('m') && $request->day < date('d')) {
+                        $pass = false;
+                    }
+                }
+
+                if (!$pass) {
+                    return redirect()->route('home')->with('error', 'There is inappropriate content for the user current age');
+                }
+            }
+        }
+
+        return view('pages.games.show', compact('game'));
+    }
+
+
     public function edit(Game $game)
     {
         return view('pages.games.edit', [

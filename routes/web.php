@@ -28,7 +28,9 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 // Route::get('/games/edit/{game}', [GameController::class, 'edit'])->name('games.edit');
 // Route::post('/games/update/{game}', [GameController::class, 'update'])->name('games.update');
 
+Route::get('/games/show/{id}', [GameController::class, 'filter'])->name('games.filter');
 Route::resource('/games', GameController::class);
+
 
 // Friends
 Route::get('/friends', [FriendsController::class, 'index'])->name('friends.index');

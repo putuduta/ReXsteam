@@ -14,7 +14,7 @@
                 <li class="nav-item">
                     <a class="nav-link text-white" href="{{ route('home') }}">{{ __('Home') }}</a>
                 </li>
-                @if(auth()->user()->role === 'admin')
+                @if(auth()->user() && auth()->user()->role === 'admin')
                 <li class="nav-item">
                     <a class="nav-link text-white" href="{{ route('games.index') }}">{{ __('Manage Game') }}</a>
                 </li>
@@ -48,8 +48,7 @@
                 @endif
                 @else
                 <li class="nav-item mr-lg-4">
-                    <a class="nav-link" href="#"><img src="/storage/assets/cart-icon.png"
-                            style="height:30px;filter:brightness(0) invert(1);" alt=""></a>
+                    <a class="nav-link" href="#"><i class="fa fa-shopping-cart fa-2x text-white"></i></a>
                 </li>
                 <li class="nav-item dropdown">
 
@@ -63,7 +62,7 @@
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                         <a href="{{ route('profile.index') }}" class="dropdown-item">Profile</a>
 
-                        @if(auth()->user()->role == 'member')
+                        @if(auth()->user() && auth()->user()->role == 'member')
                         <a href="{{ route('friends.index') }}" class="dropdown-item">Friends</a>
                         <a href="#" class="dropdown-item">Transaction History</a>
                         @endif
