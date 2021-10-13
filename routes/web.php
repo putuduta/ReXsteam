@@ -20,17 +20,11 @@ use App\Http\Controllers\GameController;
 
 Auth::routes();
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/search', [HomeController::class, 'search'])->name('search');
 
 // Games
-// Route::get('/games', [FriendsController::class, 'index'])->name('friends.index');
-// Route::get('/games/create', [GameController::class, 'create'])->name('games.create');
-// Route::post('/games/store', [GameController::class, 'store'])->name('games.store');
-// Route::get('/games/edit/{game}', [GameController::class, 'edit'])->name('games.edit');
-// Route::post('/games/update/{game}', [GameController::class, 'update'])->name('games.update');
-
 Route::get('/games/show/{id}', [GameController::class, 'filter'])->name('games.filter');
 Route::resource('/games', GameController::class);
-
 
 // Friends
 Route::get('/friends', [FriendsController::class, 'index'])->name('friends.index');

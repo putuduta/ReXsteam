@@ -4,7 +4,8 @@
 @include('include.navbar')
 <div class="main-wrapper">
     <div class="container-fluid">
-        <h1 class="title-section mb-4">Top Games</h1>
+        <h1 class="title-section mb-4">{{ $isSearch ? 'Search Games' : 'Top Games' }}</h1>
+        @if ($games->count() > 0)
         <div class="row">
             @foreach ($games as $game)
             <div class="col-md-3 my-3">
@@ -21,7 +22,10 @@
                 </a>
             </div>
             @endforeach
-        </div>
+        </div>           
+        @else
+        <h5>{{ $isSearch ? 'There are no games content can be showed right now.' : ''}}</h5>
+        @endif
     </div>
 </div>
 @include('include.footer')
