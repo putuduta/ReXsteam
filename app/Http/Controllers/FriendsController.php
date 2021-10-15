@@ -10,7 +10,7 @@ class FriendsController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware(['auth', 'member']);
     }
 
     public function index()
@@ -34,6 +34,7 @@ class FriendsController extends Controller
 
         $existUser = User::where('username', $request->input('username'))
             ->where('username', '!=', auth()->user()->username)
+            ->where('role', '==', 'user')
             ->first();
 
         if (!$existUser) return back()->with('error', 'User does not exist');

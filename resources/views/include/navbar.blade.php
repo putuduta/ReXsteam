@@ -47,9 +47,12 @@
                 </li>
                 @endif
                 @else
+                @if(auth()->user()->role == 'member')
                 <li class="nav-item mr-lg-4">
-                    <a class="nav-link" href="#"><i class="fa fa-shopping-cart fa-2x text-white"></i></a>
+                    <a class="nav-link" href="{{ route('cart.index') }}"><i
+                            class="fa fa-shopping-cart fa-2x text-white"></i></a>
                 </li>
+                @endif
                 <li class="nav-item dropdown">
 
                     <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
@@ -64,7 +67,7 @@
 
                         @if(auth()->user() && auth()->user()->role == 'member')
                         <a href="{{ route('friends.index') }}" class="dropdown-item">Friends</a>
-                        <a href="#" class="dropdown-item">Transaction History</a>
+                        <a href="{{ route('transactions.history') }}" class="dropdown-item">Transaction History</a>
                         @endif
                         <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">

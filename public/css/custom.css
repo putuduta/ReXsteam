@@ -36,7 +36,7 @@ nav {
 }
 
 .title-section {
-    font-size: 48px;
+    font-size: 42px;
     font-weight: bold;
     color: rgb(58, 58, 58);
 }
@@ -156,4 +156,10 @@ nav {
 
 .breadcrumb-item+.breadcrumb-item::before {
     content: ">";
+}
+
+.cart-image {
+    width: 400px;
+    height: 200px;
+    object-fit: cover;
 }
