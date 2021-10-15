@@ -26,7 +26,7 @@ Route::get('/search', [HomeController::class, 'search'])->name('search');
 // Route::get('/games/create', [GameController::class, 'create'])->name('games.create');
 // Route::post('/games/store', [GameController::class, 'store'])->name('games.store');
 // Route::get('/games/edit/{game}', [GameController::class, 'edit'])->name('games.edit');
-// Route::post('/games/update/{game}', [GameController::class, 'update'])->name('games.update');
+// Route::put('/games/{game}', [GameController::class, 'update'])->name('games.update');
 
 Route::resource('/games', GameController::class);
 

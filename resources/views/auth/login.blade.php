@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title-master', 'Login')
-@section('content')
+@section('content-wrapper')
 <div class="background-auth">
     <div class="container-fluid">
         <div class="row justify-content-center align-items-center">
