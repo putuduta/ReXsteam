@@ -1,7 +1,7 @@
-@extends('layouts.app')
+@extends('layouts.with-nav-foot')
 
+@section('title', 'Edit Game')
 @section('content')
-@include('include.navbar')
 <!-- Create Games -->
 <section class="main-wrapper" style="padding-top: 2rem;!important">
     <div class="container-fluid">
@@ -162,6 +162,4 @@
     });
 
 </script>
-
-@include('include.footer')
 @endsection

@@ -1,7 +1,7 @@
-@extends('layouts.app')
+@extends('layouts.with-nav-foot')
 
 @section('content')
-@include('include.navbar')
+@section('title', 'Game Detail - Age Check')
 <div class="main-wrapper">
     <div class="container-fluid">
         <div class="border border-dark p-lg-5 p-3">
@@ -76,5 +76,4 @@
         </div>
     </div>
 </div>
-@include('include.footer')
 @endsection

@@ -1,7 +1,7 @@
-@extends('layouts.app')
+@extends('layouts.with-nav-foot')
 
+@section('title', 'Profile')
 @section('content')
-@include('include.navbar')
 <div class="main-wrapper">
     <div class="container-fluid">
         <div class="row">
@@ -105,5 +105,4 @@
         </div>
     </div>
 </div>
-@include('include.footer')
 @endsection

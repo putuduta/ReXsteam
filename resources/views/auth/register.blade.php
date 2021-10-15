@@ -1,5 +1,6 @@
 @extends('layouts.app')
 
+@section('title-master', 'Register')
 @section('content')
 <div class="background-auth">
     <div class="container-fluid">

@@ -1,7 +1,7 @@
-@extends('layouts.app')
+@extends('layouts.with-nav-foot')
 
+@section('title', 'Home')
 @section('content')
-@include('include.navbar')
 <div class="main-wrapper">
     <div class="container-fluid">
         <h1 class="title-section mb-4">Top Games</h1>
@@ -24,5 +24,4 @@
         </div>
     </div>
 </div>
-@include('include.footer')
 @endsection

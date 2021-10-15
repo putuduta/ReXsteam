@@ -1,7 +1,7 @@
-@extends('layouts.app')
+@extends('layouts.with-nav-foot')
 
+@section('title', 'Game Detail')
 @section('content')
-@include('include.navbar')
 <div class="main-wrapper">
     <div class="container-fluid">
         <nav aria-label="breadcrumb">
@@ -55,5 +55,4 @@
         </p>
     </div>
 </div>
-@include('include.footer')
 @endsection
