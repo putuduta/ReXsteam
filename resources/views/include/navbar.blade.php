@@ -24,7 +24,7 @@
             <!-- Right Side Of Navbar -->
             <ul class="navbar-nav ml-auto">
                 <div class="mr-lg-4">
-                    <form action="#" method="GET" class="mb-0">
+                    <form action="{{ route('search') }}" method="GET" class="mb-0">
                         @csrf
                         <div class="d-flex">
                             <input type="text" name="search_value" class="form-control bg-dark text-white" required
