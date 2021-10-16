@@ -25,6 +25,7 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/search', [HomeController::class, 'search'])->name('search');
 
 // Games
+Route::get('/games/filter', [GameController::class, 'filter'])->name('games.filter');
 Route::resource('/games', GameController::class);
 
 // Friends

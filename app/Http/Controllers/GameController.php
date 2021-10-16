@@ -16,7 +16,30 @@ class GameController extends Controller
 
     public function index()
     {
-        return view('pages.games.index');
+        return view('pages.games.index', [
+            'games' => Game::paginate(8)
+        ]);
+    }
+
+    public function filter(Request $request) {
+        // dd($this->filterQuery($request->name, $request->category));
+        return view('pages.games.index', [
+            'games' => $this->filterQuery($request->name, $request->category)
+        ]);
+    }
+
+    private function filterQuery($name, $categories) {
+        if (isset($name) && isset($categories)) {
+            return Game::where('name', 'LIKE', '%' . $name . '%')
+            ->whereIn('category', $categories)
+            ->paginate(8);
+        }  
+        
+        if (isset($name) && !isset($categories)) 
+            return Game::where('name', 'LIKE', '%' . $name . '%')->paginate(8);
+
+        if (!isset($name) && isset($categories)) 
+            return Game::whereIn('category', $categories)->paginate(8);
     }
 
     public function create()
@@ -140,7 +163,7 @@ class GameController extends Controller
     public function destroy(Game $game)
     {
         $game->delete();
-        return redirect()->back()->with('success', 'Success delete game!');
+        return redirect()->route('games.index')->with('success', 'Success delete game!');
     }
 
     // Function for validating request
