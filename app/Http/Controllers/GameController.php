@@ -21,24 +21,26 @@ class GameController extends Controller
         ]);
     }
 
-    public function filter(Request $request) {
+    public function filter(Request $request)
+    {
         // dd($this->filterQuery($request->name, $request->category));
         return view('pages.games.index', [
             'games' => $this->filterQuery($request->name, $request->category)
         ]);
     }
 
-    private function filterQuery($name, $categories) {
+    private function filterQuery($name, $categories)
+    {
         if (isset($name) && isset($categories)) {
             return Game::where('name', 'LIKE', '%' . $name . '%')
-            ->whereIn('category', $categories)
-            ->paginate(8);
-        }  
-        
-        if (isset($name) && !isset($categories)) 
+                ->whereIn('category', $categories)
+                ->paginate(8);
+        }
+
+        if (isset($name) && !isset($categories))
             return Game::where('name', 'LIKE', '%' . $name . '%')->paginate(8);
 
-        if (!isset($name) && isset($categories)) 
+        if (!isset($name) && isset($categories))
             return Game::whereIn('category', $categories)->paginate(8);
     }
 
@@ -68,16 +70,16 @@ class GameController extends Controller
         }
 
         Game::create([
-            'name' => request('name'),
-            'description' => request('description'),
-            'long_description' => request('long_description'),
-            'category' => request('category'),
-            'developer' => request('developer'),
-            'publisher' => request('publisher'),
-            'price' => request('price'),
+            'name' => $request->input('name'),
+            'description' => $request->input('description'),
+            'long_description' => $request->input('long_description'),
+            'category' => $request->input('category'),
+            'developer' => $request->input('developer'),
+            'publisher' => $request->input('publisher'),
+            'price' => $request->input('price'),
             'cover' => $coverFileName,
             'trailer' => $trailerName,
-            'is_adult' => request('is_adult') ? true : false,
+            'is_adult' => $request->input('is_adult') ? true : false,
         ]);
 
         return redirect()->route('games.index')->with('success', 'Game Successfully Created!');
@@ -149,10 +151,10 @@ class GameController extends Controller
         }
 
         $game->update([
-            'description' => request('description'),
-            'long_description' => request('long_description'),
-            'category' => request('category'),
-            'price' => request('price'),
+            'description' => $request->input('description'),
+            'long_description' => $request->input('long_description'),
+            'category' => $request->input('category'),
+            'price' => $request->input('price'),
             'cover' => $coverFileName,
             'trailer' => $trailerFileName,
         ]);

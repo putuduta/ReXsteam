@@ -24,7 +24,7 @@
                     @endforeach
                 </div>
                 @if ($isSearch)
-                    {{ $games->links() }}
+                    {{ $games->withQueryString()->links() }}
                 @endif
             @else
                 <h5>{{ $isSearch ? 'There are no games content can be showed right now.' : '' }}</h5>

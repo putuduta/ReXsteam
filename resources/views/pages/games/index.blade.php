@@ -167,7 +167,7 @@
                     </div>
                 @endforeach
 
-                {{ $games->links() }}
+                {{ $games->withQueryString()->links() }}
             @else
                 <div class="container-fluid mt-3">
                     <h3>There are no games content can be showed right now</h3>

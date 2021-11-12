@@ -34,11 +34,12 @@ class HomeController extends Controller
         ]);
     }
 
-    private function game($isSearch, $request) {
+    private function game($isSearch, $request)
+    {
         if ($isSearch) {
             return Game::where('name', 'LIKE', '%' . $request->search_value . '%')
-            ->orWhere('category', 'LIKE', '%' . $request->search_value . '%')
-            ->paginate(8);
+                ->orWhere('category', 'LIKE', '%' . $request->search_value . '%')
+                ->paginate(8);
         } else {
             return Game::count() > 8 ? Game::all()->random(8) : Game::all();
         }
