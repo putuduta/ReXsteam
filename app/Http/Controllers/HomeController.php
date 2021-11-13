@@ -22,7 +22,7 @@ class HomeController extends Controller
     {
         return view('pages.home', [
             'games' => $this->game(false, null),
-            'isSearch' => false
+            'isSearch' => false,
         ]);
     }
 
@@ -30,7 +30,8 @@ class HomeController extends Controller
     {
         return view('pages.home', [
             'games' => $this->game(true, $request),
-            'isSearch' => true
+            'isSearch' => true,
+            'keyword' => $request->search_value
         ]);
     }
 

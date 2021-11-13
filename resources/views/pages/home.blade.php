@@ -4,7 +4,7 @@
 @section('content')
 <div class="main-wrapper">
     <div class="container-fluid">
-        <h1 class="title-section mb-4">{{ $isSearch ? 'Search Games' : 'Top Games' }}</h1>
+        <h1 class="title-section mb-4">{{ $isSearch ? 'Search Games: '.$keyword : 'Top Games' }}</h1>
         @if ($games->count() > 0)
         <div class="row">
             @foreach ($games as $game)
