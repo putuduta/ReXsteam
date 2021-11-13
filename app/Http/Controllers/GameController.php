@@ -17,31 +17,36 @@ class GameController extends Controller
     public function index()
     {
         return view('pages.games.index', [
-            'games' => Game::paginate(8)
+            'games' => Game::paginate(8),
+            'name' => '',
+            'category' => '',
         ]);
     }
 
     public function filter(Request $request)
-    {
-        // dd($this->filterQuery($request->name, $request->category));
+    {;
         return view('pages.games.index', [
-            'games' => $this->filterQuery($request->name, $request->category)
+            'games' => $this->filterQuery($request->name, $request->category),
+            'name' => $request->name,
+            'category' => $request->category,
         ]);
     }
 
-    private function filterQuery($name, $categories)
+    private function filterQuery($name, $category)
     {
-        if (isset($name) && isset($categories)) {
+        if (isset($name) && isset($category)) {
             return Game::where('name', 'LIKE', '%' . $name . '%')
-                ->whereIn('category', $categories)
+                ->where('category', $category)
                 ->paginate(8);
         }
 
-        if (isset($name) && !isset($categories))
+        if (isset($name) && !isset($category))
             return Game::where('name', 'LIKE', '%' . $name . '%')->paginate(8);
 
-        if (!isset($name) && isset($categories))
-            return Game::whereIn('category', $categories)->paginate(8);
+        if (!isset($name) && isset($category))
+            return Game::where('category', $category)->paginate(8);
+
+        return Game::paginate(8);
     }
 
     public function create()

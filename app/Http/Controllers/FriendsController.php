@@ -20,8 +20,14 @@ class FriendsController extends Controller
         $pendingRequests = Friendship::with('friend')->where('user_id', auth()->user()->id)->where('is_mutual', false)->get();
 
         $friends = Friendship::with('friend', 'user')
-            ->where('user_id', auth()->user()->id)->orWhere('friend_id', auth()->user()->id);
-        $friends = $friends->where('is_mutual', true)->get();
+            ->where(function ($query) {
+                $query->where('user_id', auth()->user()->id)
+                    ->where('is_mutual', true);
+            })
+            ->orWhere(function ($query) {
+                $query->where('friend_id', auth()->user()->id)
+                    ->where('is_mutual', true);
+            })->get();
 
         return view('pages.friends', compact('incomingRequests', 'pendingRequests', 'friends'));
     }
@@ -34,7 +40,7 @@ class FriendsController extends Controller
 
         $existUser = User::where('username', $request->input('username'))
             ->where('username', '!=', auth()->user()->username)
-            ->where('role', '==', 'user')
+            ->where('role', 'member')
             ->first();
 
         if (!$existUser) return back()->with('error', 'User does not exist');
