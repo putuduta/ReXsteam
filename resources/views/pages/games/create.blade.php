@@ -59,10 +59,23 @@
                     <div class="col-sm-12">
                         <select class="form-control" @error('category') is-invalid @enderror id="category"
                             name="category">
-                            <option value="Action" {{ old('category') == 'Action' ? 'selected' : '' }}>Action</option>
+                            <option value="Idle" {{ old('category') == 'Idle' ? 'selected' : '' }}>Idle</option>
+                            <option value="Horror" {{ old('category') == 'Horror' ? 'selected' : '' }}>Horror</option>
                             <option value="Adventure" {{ old('category') == 'Adventure' ? 'selected' : '' }}>Adventure
                             </option>
-                            <option value="Horror" {{ old('category') == 'Horror' ? 'selected' : '' }}>Horror</option>
+                            <option value="Action" {{ old('category') == 'Action' ? 'selected' : '' }}>Action</option>
+                            <option value="Sports" {{ old('category') == 'Sports' ? 'selected' : '' }}>Sports</option>
+                            <option value="Strategy" {{ old('category') == 'Strategy' ? 'selected' : '' }}>Strategy
+                            </option>
+                            <option value="Role-playing" {{ old('category') == 'Role-playing' ? 'selected' : '' }}>
+                                Role-playing
+                            </option>
+                            <option value="Puzzle" {{ old('category') == 'Puzzle' ? 'selected' : '' }}>
+                                Puzzle
+                            </option>
+                            <option value="Simulation" {{ old('category') == 'Simulation' ? 'selected' : '' }}>
+                                Simulation
+                            </option>
                         </select>
                         @error('long_description')
                         <span class="invalid-feedback" role="alert">
