@@ -9,7 +9,7 @@ class Cart extends Model
 {
     use HasFactory;
 
-    protected $table = 'cart';
+    protected $table = 'carts';
     protected $primaryKey = 'id';
     protected $timestamp = true;
     protected $guarded = [];
