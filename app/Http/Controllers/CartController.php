@@ -15,10 +15,7 @@ class CartController extends Controller
     public function index()
     {
         return view('pages.cart', [
-            'carts' => Cart::where('user_id', auth()->user()->id)->get(),
-            'amount' => Cart::join('games', 'carts.game_id', '=', 'games.id')
-                ->where('carts.user_id', auth()->user()->id)
-                ->sum('games.price')
+            'carts' => Cart::where('user_id', auth()->user()->id)->get()
         ]);
     }
 

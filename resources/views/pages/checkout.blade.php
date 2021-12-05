@@ -7,7 +7,7 @@
         @include('include.transaction-nav')
         <h1 class="title-section my-5">Transaction Information</h1>
 
-        <form action="#" method="POST">
+        <form method="POST" action="{{ route('transactions.store') }}">
             @csrf
             <div class="my-3">
                 <label for="card_name" class="text-dark font-weight-bold">Card
@@ -102,12 +102,12 @@
                 </div>
             </div>
             <div class="d-flex justify-content-between mt-4">
-                <h4 class="text-dark">Total Price: <span class="font-weight-bold">Rp. 851.000</span></h4>
+                <h4 class="text-dark">Total Price: <span class="font-weight-bold">Rp. {{ $amount }}</span></h4>
                 <div class="d-flex">
                     <a href="{{ route('cart.index') }}" class="btn bg-white text-dark">Cancel</a>
-                    <a class="btn btn-secondary ml-3" href="{{ route('transactions.receipt') }}">
+                    <button class="btn btn-secondary ml-3" type="submit"> 
                         <h5 class="text-white my-1"><i class="fa fa-truck"></i> Checkout</h5>
-                    </a>
+                    </button>
                 </div>
             </div>
         </form>

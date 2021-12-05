@@ -43,5 +43,6 @@ Route::get('/cart/store/{id}', [CartController::class, 'store'])->name('cart.sto
 Route::get('/cart/destroy/{cart}', [CartController::class, 'destroy'])->name('cart.destroy');
 
 Route::get('/checkout', [TransactionController::class, 'checkout'])->name('transactions.checkout');
-Route::get('/receipt', [TransactionController::class, 'receipt'])->name('transactions.receipt');
+Route::post('/checkout/store', [TransactionController::class, 'store'])->name('transactions.store');
+Route::get('/receipt/{transactionHeader}', [TransactionController::class, 'receipt'])->name('transactions.receipt');
 Route::get('/history', [TransactionController::class, 'history'])->name('transactions.history');

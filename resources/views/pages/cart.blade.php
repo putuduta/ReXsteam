@@ -2,13 +2,15 @@
 
 @section('title', 'Cart')
 @section('content')
+@php
+$amount = 0
+@endphp    
 <div class="main-wrapper">
     <div class="container-fluid">
         @include('include.transaction-nav')
         <h1 class="title-section mt-5 mb-4">Shopping Cart</h1>
         <div class="card">
             <div class="card-body my-3">
-
                 @foreach ($carts as $cart)
                 <div class="d-lg-flex justify-content-between align-items-center my-3">
                     <div class="d-lg-flex align-items-center">
@@ -26,6 +28,9 @@
                     </button>
                 </div>
                 <hr>
+                @php
+                $amount += $cart->game->price
+                @endphp
                 @endforeach
 
                 <h4 class="text-dark my-4">Total Price: <span class="font-weight-bold">Rp. {{ $amount
