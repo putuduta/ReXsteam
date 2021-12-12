@@ -14,7 +14,7 @@ $amount = 0
                 @foreach ($carts as $cart)
                 <div class="d-lg-flex justify-content-between align-items-center my-3">
                     <div class="d-lg-flex align-items-center">
-                        <img src="/storage/assets/test.jpg" class="cart-image" alt="">
+                        <img src="/storage/assets/covers/{{ $cart->game->cover }}" class="cart-image" alt="">
                         <div class="ml-4">
                             <h2 class="font-weight-bold"><span class="text-dark">{{ $cart->game->name }}</span><span
                                     class="btn btn-dark text-white ml-2 rounded-pill">{{ $cart->game->category }}</span>

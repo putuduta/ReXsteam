@@ -19,8 +19,8 @@
                         $amount = 0
                         @endphp
                         <div class="my-4">
-                            <h5>Transaction ID: lakdsjasldkjsalkdjsa</h5>
-                            <h5>Purchased Date: 21-05-2021 08:11:11</h5>
+                            <h5>Transaction ID: {{ $transactionHeader->id }}</h5>
+                            <h5>Purchased Date: {{ $transactionHeader->created_at }}</h5>
 
                             <div class="row mt-3">
                                 @foreach ($transactionDetails as $transactionDetail)

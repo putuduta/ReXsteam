@@ -19,7 +19,7 @@ $amount = 0
                 {{-- 1 cart item --}}
                 @foreach ($transactionDetails as $transactionDetail)
                 <div class="d-lg-inline-flex align-items-center my-3">
-                    <img src="/storage/assets/test.jpg" class="cart-image" alt="">
+                    <img src="/storage/assets/covers/{{ $transactionDetail->game->cover }}" class="cart-image" alt="">
                     <div class="ml-4">
                         <h2 class="font-weight-bold text-dark">{{ $transactionDetail->game->name }}</h2>
                         <h5 class="text-muted m-0 mt-3"><i class="fa fa-tag fa-2x"></i> Rp.{{ $transactionDetail->game->price }}&nbsp;&nbsp;</h5>
