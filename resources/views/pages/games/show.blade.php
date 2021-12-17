@@ -24,14 +24,14 @@
 
                 <h5 class="mt-3 font-weight-bold">Genre: <span class="font-weight-normal">{{ $game->category }}</span>
                 </h5>
-                <h5 class="mt-3 font-weight-bold">Release Date: <span
-                        class="font-weight-normal">{{ date_format($game->created_at,"F d, Y") }}</span>
+                <h5 class="mt-3 font-weight-bold">Release Date: <span class="font-weight-normal">{{
+                        date_format($game->created_at,"F d, Y") }}</span>
                 </h5>
-                <h5 class="mt-3 font-weight-bold">Developer: <span
-                        class="font-weight-normal">{{ $game->developer }}</span>
+                <h5 class="mt-3 font-weight-bold">Developer: <span class="font-weight-normal">{{ $game->developer
+                        }}</span>
                 </h5>
-                <h5 class="mt-3 font-weight-bold">Publisher: <span
-                        class="font-weight-normal">{{ $game->publisher }}</span>
+                <h5 class="mt-3 font-weight-bold">Publisher: <span class="font-weight-normal">{{ $game->publisher
+                        }}</span>
                 </h5>
             </div>
         </div>
@@ -39,11 +39,11 @@
             <div class="card-body">
                 <div class="d-flex justify-content-between align-items-center">
                     <h4>Buy {{ $game->name }}</h4>
-                    <button class="btn btn-dark p-3">
+                    <a class="btn btn-dark p-3" href="{{ route('cart.store', $game->id) }}">
                         <h5 class="m-0">Rp.{{ $game->price }}&nbsp;&nbsp;|&nbsp;&nbsp;<i
                                 class="fa fa-shopping-cart"></i> ADD TO
                             CART</h5>
-                    </button>
+                    </a>
                 </div>
             </div>
         </div>

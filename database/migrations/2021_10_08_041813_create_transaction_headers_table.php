@@ -19,7 +19,8 @@ class CreateTransactionHeadersTable extends Migration
             $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
             $table->string('card_name');
             $table->string('card_number');
-            $table->string('expired_date');
+            $table->int('expired_month');
+            $table->int('expired_year');
             $table->string('cvc_cvv');
             $table->string('card_country');
             $table->string('postal_code');

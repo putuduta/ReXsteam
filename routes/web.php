@@ -39,6 +39,10 @@ Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index
 Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
 
 Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+Route::get('/cart/store/{id}', [CartController::class, 'store'])->name('cart.store');
+Route::get('/cart/destroy/{cart}', [CartController::class, 'destroy'])->name('cart.destroy');
+
 Route::get('/checkout', [TransactionController::class, 'checkout'])->name('transactions.checkout');
-Route::get('/receipt', [TransactionController::class, 'receipt'])->name('transactions.receipt');
+Route::post('/checkout/store', [TransactionController::class, 'store'])->name('transactions.store');
+Route::get('/receipt/{transactionHeader}', [TransactionController::class, 'receipt'])->name('transactions.receipt');
 Route::get('/history', [TransactionController::class, 'history'])->name('transactions.history');
