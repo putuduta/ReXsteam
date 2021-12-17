@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Cart;
-use Illuminate\Http\Request;
+use App\Models\Game;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\Cookie;
 
 class CartController extends Controller
 {
@@ -14,23 +15,61 @@ class CartController extends Controller
 
     public function index()
     {
+        $cartGames = new Collection();
+        $cartCookie = Cookie::get('cart');
+
+        if ($cartCookie) {
+            $cartArray = explode(";", $cartCookie);
+
+            foreach ($cartArray as $cart) {
+                $game = Game::find($cart);
+                $cartGames->push($game);
+            }
+        }
+
         return view('pages.cart', [
-            'carts' => Cart::where('user_id', auth()->user()->id)->get()
+            'cartGames' => $cartGames,
         ]);
     }
 
     public function store($id)
     {
-        Cart::create([
-            'game_id' => $id,
-            'user_id' => auth()->user()->id
-        ]);
-        return redirect()->route('home')->with('success', 'Successfully add to cart!');
+        $selectedGame = Game::find($id);
+        if ($selectedGame) {
+
+            $newCartCookie = Cookie::get('cart');
+
+            if ($newCartCookie == null) $newCartCookie = $id;
+            else {
+                $cartArray = explode(";", $newCartCookie);
+
+                foreach ($cartArray as $cart) {
+                    if ($cart == $id) {
+                        return back()->with('error', 'This game already in your cart');
+                    }
+                }
+                $newCartCookie .= ";" . $id;
+            }
+            Cookie::queue('cart', $newCartCookie, 120);
+            return redirect()->route('home')->with('success', 'Successfully add game to cart!');
+        } else {
+            return back()->with('error', 'Game Not Found');
+        }
     }
 
-    public function destroy(Cart $cart)
+    public function destroy($id)
     {
-        $cart->delete();
-        return redirect()->route('games.index')->with('success', 'Success delete cart!');
+        $cartCookie = Cookie::get('cart');
+        $newCartCookie = "";
+        $cartArray = explode(";", $cartCookie);
+
+        foreach ($cartArray as $cart) {
+            if ($cart != $id) $newCartCookie .= $cart;
+        }
+
+        if ($newCartCookie == "") Cookie::queue(Cookie::forget('cart'));
+        else Cookie::queue('cart', $newCartCookie, 120);
+
+        return redirect()->back()->with('success', 'Success delete game in the cart!');
     }
 }

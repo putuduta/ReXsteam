@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Cart;
+use App\Models\Game;
 use App\Models\TransactionDetail;
 use App\Models\TransactionHeader;
+use App\Rules\CardNumberFormat;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cookie;
 
 class TransactionController extends Controller
 {
@@ -14,21 +17,40 @@ class TransactionController extends Controller
         $this->middleware(['auth', 'member']);
     }
 
+    protected function getAllCartGames()
+    {
+        $cartGames = new Collection();
+        $cartCookie = Cookie::get('cart');
+
+        if ($cartCookie) {
+            $cartArray = explode(";", $cartCookie);
+
+            foreach ($cartArray as $cart) {
+                $game = Game::find($cart);
+                $cartGames->push($game);
+            }
+        }
+
+        return $cartGames;
+    }
+
     public function checkout()
     {
-        return view('pages.checkout', [
-            'amount' => Cart::join('games', 'carts.game_id', '=', 'games.id')
-                ->where('carts.user_id', auth()->user()->id)
-                ->sum('games.price')
-        ]);
+        $cartGames = $this->getAllCartGames();
+        if (count($cartGames) > 0) {
+            return view('pages.checkout', [
+                'amount' => $cartGames->sum('price')
+            ]);
+        } else {
+            return back()->with('error', 'No games in the cart. Cannot checkout');
+        }
     }
 
     public function store(Request $request)
     {
-
         $request->validate([
             'card_name' => 'string|min:6',
-            'card_number' => 'required|integer|digits_between:1,12',
+            'card_number' => ['required', 'string', new CardNumberFormat],
             'expired_month' => 'required|integer|min:1|max:12',
             'expired_year' => 'required|integer|min:2021|max:2025',
             'cvc_cvv' => 'required|integer|digits_between:3,4',
@@ -47,21 +69,20 @@ class TransactionController extends Controller
             'postal_code' => $request->input('postal_code'),
         ]);
 
-        $carts = Cart::where('user_id', auth()->user()->id)->get();
-        
-        if ($carts) {
-            
-            foreach ($carts as $cart) {
+        $cartGames = $this->getAllCartGames();
+
+        if ($cartGames) {
+            foreach ($cartGames as $cartGame) {
                 TransactionDetail::create([
                     'transaction_id' => $transactionHeader->id,
-                    'game_id' => $cart->game_id,
+                    'game_id' => $cartGame->id,
                 ]);
-
-                $cart->delete();
             }
+            Cookie::queue(Cookie::forget('cart'));
+            return redirect()->route('transactions.receipt', $transactionHeader)->with('success', 'Successfully checkout!');
+        } else {
+            return back()->with('error', 'No games in cart. Please buy minimal one games');
         }
-            
-        return redirect()->route('transactions.receipt', $transactionHeader)->with('success', 'Successfully checkout!');
     }
 
     public function receipt(TransactionHeader $transactionHeader)

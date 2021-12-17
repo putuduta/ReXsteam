@@ -40,7 +40,7 @@ Route::put('/profile', [ProfileController::class, 'update'])->name('profile.upda
 
 Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
 Route::get('/cart/store/{id}', [CartController::class, 'store'])->name('cart.store');
-Route::get('/cart/destroy/{cart}', [CartController::class, 'destroy'])->name('cart.destroy');
+Route::delete('/cart/destroy/{id}', [CartController::class, 'destroy'])->name('cart.destroy');
 
 Route::get('/checkout', [TransactionController::class, 'checkout'])->name('transactions.checkout');
 Route::post('/checkout/store', [TransactionController::class, 'store'])->name('transactions.store');
