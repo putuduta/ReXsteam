@@ -35,17 +35,12 @@
                 </div>
                 <!-- Authentication Links -->
                 @guest
-                @if (Route::has('login'))
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="{{ route('login') }}">{{ __('Login') }}</a>
+                    <a class="nav-link text-white" href="{{ route('auth.view-login') }}">{{ __('Login') }}</a>
                 </li>
-                @endif
-
-                @if (Route::has('register'))
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="{{ route('register') }}">{{ __('Register') }}</a>
+                    <a class="nav-link text-white" href="{{ route('auth.view-register') }}">{{ __('Register') }}</a>
                 </li>
-                @endif
                 @else
                 @if(auth()->user()->role == 'member')
                 <li class="nav-item mr-lg-4">
@@ -58,7 +53,7 @@
                     <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                         <img class="img-profile-navbar"
-                            src="/storage/assets/{{ auth()->user()->profile_picture ? auth()->user()->profile_picture : 'user-default.png'}}"
+                            src="/storage/assets/profile/{{ auth()->user()->profile_picture ? auth()->user()->profile_picture : 'user-default.png'}}"
                             alt="">
                     </a>
 
@@ -69,12 +64,12 @@
                         <a href="{{ route('friends.index') }}" class="dropdown-item">Friends</a>
                         <a href="{{ route('transactions.history') }}" class="dropdown-item">Transaction History</a>
                         @endif
-                        <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+                        <a class="dropdown-item" href="{{ route('auth.logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                             {{ __('Sign Out') }}
                         </a>
 
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                        <form id="logout-form" action="{{ route('auth.logout') }}" method="POST" class="d-none">
                             @csrf
                         </form>
                     </div>

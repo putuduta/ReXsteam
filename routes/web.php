@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CartController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -20,9 +21,15 @@ use App\Http\Controllers\TransactionController;
 |
 */
 
-Auth::routes();
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/search', [HomeController::class, 'search'])->name('search');
+
+// Auth
+Route::get('/register', [AuthController::class, 'viewRegister'])->name('auth.view-register');
+Route::post('/register', [AuthController::class, 'register'])->name('auth.register');
+Route::get('/login', [AuthController::class, 'viewLogin'])->name('auth.view-login');
+Route::post('/login', [AuthController::class, 'login'])->name('auth.login');
+Route::post('/logout', [AuthController::class, 'logout'])->name('auth.logout');
 
 // Games
 Route::get('/games/filter', [GameController::class, 'filter'])->name('games.filter');

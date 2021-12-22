@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Game;
+use App\Models\TransactionDetail;
 use Illuminate\Http\Request;
 
 class GameController extends Controller
@@ -10,8 +11,7 @@ class GameController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth');
-        $this->middleware('admin')->except('show');
+        $this->middleware(['auth', 'admin'])->except('show');
     }
 
     public function index()
@@ -124,7 +124,13 @@ class GameController extends Controller
             }
         }
 
-        return view('pages.games.show', compact('game'));
+        $existGame = TransactionDetail::whereHas('transactionHeader', function ($query) {
+            $query->where('user_id', auth()->user()->id);
+        })->where('game_id', $game->id)->first();
+
+        $isExist = $existGame ? true : false;
+
+        return view('pages.games.show', compact('game', 'isExist'));
     }
 
 
@@ -164,7 +170,7 @@ class GameController extends Controller
             'trailer' => $trailerFileName,
         ]);
 
-        return redirect()->route('home')->with('success', 'Edit Success!');
+        return redirect()->route('games.index')->with('success', 'Edit Success!');
     }
 
     public function destroy(Game $game)

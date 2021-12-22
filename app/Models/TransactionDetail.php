@@ -16,7 +16,7 @@ class TransactionDetail extends Model
 
     public function transactionHeader()
     {
-        return $this->belongsTo('App\Models\TransactionHeader', 'transaction_header_id', 'id');
+        return $this->belongsTo('App\Models\TransactionHeader', 'transaction_id', 'id');
     }
 
     public function game()

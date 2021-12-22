@@ -8,7 +8,7 @@
             <div class="col-md-6 px-lg-5 text-white">
 
                 <h1 class="title-auth text-white mb-4">Login Page</h1>
-                <form method="POST" action="{{ route('login') }}">
+                <form method="POST" action="{{ route('auth.login') }}">
                     @csrf
 
                     <div class="form-group mb-4">
@@ -49,13 +49,11 @@
                         {{ __('Sign In') }}
                     </button>
 
-                    @if (Route::has('login'))
                     <div class="text-right mt-3">
-                        <a class="btn btn-link" href="{{ route('register') }}">
+                        <a class="btn btn-link" href="{{ route('auth.view-register') }}">
                             {{ __('Dont have an account?') }}
                         </a>
                     </div>
-                    @endif
                 </form>
             </div>
 

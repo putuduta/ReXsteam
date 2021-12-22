@@ -19,8 +19,9 @@
                             @method('put')
                             <div class="row">
                                 <div class="col-md-2 order-md-2">
-                                    <img src="/storage/assets/{{ auth()->user()->profile_picture ? auth()->user()->profile_picture : 'user-default.png' }}"
-                                        class="w-100 rounded-circle" alt="">
+                                    <img src="/storage/assets/profile/{{ auth()->user()->profile_picture ? auth()->user()->profile_picture : 'user-default.png' }}"
+                                        class="w-100 rounded-circle" alt=""
+                                        style="width: 100%;height:65%;object-fit:cover">
 
                                 </div>
                                 <div class="col-md-10 order-md-1">

@@ -35,6 +35,7 @@
                 </h5>
             </div>
         </div>
+        @if(!$isExist)
         <div class="card bg-muted shadow mt-4">
             <div class="card-body">
                 <div class="d-flex justify-content-between align-items-center">
@@ -47,7 +48,7 @@
                 </div>
             </div>
         </div>
-
+        @endif
         <h3 class="text-dark font-weight-bold mt-4">ABOUT THIS GAME</h3>
         <hr>
         <p>
